@@ -27,7 +27,7 @@ const sendAPI = () => {
     .catch(error => console.log(error));
 }
 
-const createList = (arr) => {listCountry.insertAdjacentHTML("beforebegin", templateList(arr));}
+const createList = (arr) => {listCountry.insertAdjacentHTML("afterbegin", templateList(arr));}
 
 inputCountry.addEventListener("input", debounsed(sendAPI, 500));
 

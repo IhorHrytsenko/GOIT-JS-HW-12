@@ -2528,7 +2528,7 @@ var templateFunction = _handlebars.default.template({
       return undefined;
     };
 
-    return "<li>" + container.escapeExpression(container.lambda(depth0 != null ? lookupProperty(depth0, "name") : depth0, depth0)) + "</li>\r\n";
+    return "<li class=\"js-item\">" + container.escapeExpression(container.lambda(depth0 != null ? lookupProperty(depth0, "name") : depth0, depth0)) + "</li>\r\n";
   },
   "compiler": [8, ">= 4.3.0"],
   "main": function main(container, depth0, helpers, partials, data) {
@@ -2615,7 +2615,7 @@ var sendAPI = function sendAPI() {
 };
 
 var createList = function createList(arr) {
-  listCountry.insertAdjacentHTML("beforebegin", (0, _list.default)(arr));
+  listCountry.insertAdjacentHTML("afterbegin", (0, _list.default)(arr));
 };
 
 inputCountry.addEventListener("input", (0, _lodash.default)(sendAPI, 500));
@@ -2647,7 +2647,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58077" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49672" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
