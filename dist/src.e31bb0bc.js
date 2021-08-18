@@ -2588,6 +2588,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var inputCountry = document.querySelector("#js-input");
 var countries = document.querySelector("#js-country");
 var arrCountry = [];
+var clearButton = document.querySelector("#js-clear");
 
 var listCountryCreate = function listCountryCreate() {
   var listCountry = document.createElement("ul");
@@ -2601,7 +2602,6 @@ var createList = function createList(arr) {
 };
 
 var sendAPI = function sendAPI() {
-  // listCountryCreate().parentElement.remove(listCountryCreate());
   fetch("https://restcountries.eu/rest/v2/name/".concat(inputCountry.value)).then(function (data) {
     return data.json();
   }).then(function (arr) {
@@ -2618,6 +2618,9 @@ var sendAPI = function sendAPI() {
 };
 
 inputCountry.addEventListener("input", (0, _lodash.default)(sendAPI, 750));
+clearButton.addEventListener("click", function () {
+  countries.removeChild(listCountryCreate());
+});
 },{"lodash.debounce":"../node_modules/lodash.debounce/index.js","./templates/list.hbs":"templates/list.hbs"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
