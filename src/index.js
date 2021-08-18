@@ -4,32 +4,35 @@ import debounsed from 'lodash.debounce';
 import templateList from "./templates/list.hbs";
 
 const inputCountry = document.querySelector("#js-input");
+const countries = document.querySelector("#js-country");
 let arrCountry = [];
-const listCountry = document.querySelector("#js-list");
 
-const clear = () =>{
-    arrCountry = [];
-    listCountry.remove;
+const listCountryCreate = () => {
+    const listCountry = document.createElement("ul");
+    listCountry.id = "#js-list";
+    countries.appendChild(listCountry);
+    return listCountry;
 }
 
+const createList = (arr) => {listCountryCreate().insertAdjacentHTML("afterbegin", templateList(arr));}
+
+
 const sendAPI = () => {
-    const country = fetch(`https://restcountries.eu/rest/v2/name/${inputCountry.value}`)
+    // listCountryCreate().parentElement.remove(listCountryCreate());
+    fetch(`https://restcountries.eu/rest/v2/name/${inputCountry.value}`)
     .then(data => { return data.json()})
     .then (arr => {arrCountry.push(...arr);
-        if (arrCountry.length <= 10){
+        if (arrCountry.length > 1 && arrCountry.length <= 10){
             createList(arrCountry);
         }
         else{
             console.log("more countries");
         }
-        clear(arrCountry);
     })
     .catch(error => console.log(error));
 }
 
-const createList = (arr) => {listCountry.insertAdjacentHTML("afterbegin", templateList(arr));}
-
-inputCountry.addEventListener("input", debounsed(sendAPI, 500));
+inputCountry.addEventListener("input", debounsed(sendAPI, 750));
 
 
 

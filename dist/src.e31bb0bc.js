@@ -2586,39 +2586,38 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var inputCountry = document.querySelector("#js-input");
+var countries = document.querySelector("#js-country");
 var arrCountry = [];
-var listCountry = document.querySelector("#js-list");
 
-var clear = function clear() {
-  arrCountry = [];
-  listCountry.remove;
+var listCountryCreate = function listCountryCreate() {
+  var listCountry = document.createElement("ul");
+  listCountry.id = "#js-list";
+  countries.appendChild(listCountry);
+  return listCountry;
+};
+
+var createList = function createList(arr) {
+  listCountryCreate().insertAdjacentHTML("afterbegin", (0, _list.default)(arr));
 };
 
 var sendAPI = function sendAPI() {
-  var country = fetch("https://restcountries.eu/rest/v2/name/".concat(inputCountry.value)).then(function (data) {
+  // listCountryCreate().parentElement.remove(listCountryCreate());
+  fetch("https://restcountries.eu/rest/v2/name/".concat(inputCountry.value)).then(function (data) {
     return data.json();
   }).then(function (arr) {
-    var _arrCountry;
+    arrCountry.push.apply(arrCountry, _toConsumableArray(arr));
 
-    (_arrCountry = arrCountry).push.apply(_arrCountry, _toConsumableArray(arr));
-
-    if (arrCountry.length <= 10) {
+    if (arrCountry.length > 1 && arrCountry.length <= 10) {
       createList(arrCountry);
     } else {
       console.log("more countries");
     }
-
-    clear(arrCountry);
   }).catch(function (error) {
     return console.log(error);
   });
 };
 
-var createList = function createList(arr) {
-  listCountry.insertAdjacentHTML("afterbegin", (0, _list.default)(arr));
-};
-
-inputCountry.addEventListener("input", (0, _lodash.default)(sendAPI, 500));
+inputCountry.addEventListener("input", (0, _lodash.default)(sendAPI, 750));
 },{"lodash.debounce":"../node_modules/lodash.debounce/index.js","./templates/list.hbs":"templates/list.hbs"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
