@@ -36,7 +36,7 @@ const sendAPI = () => {
         }
         
         arrCountry.push(...arr);
-
+        
         if (arrCountry.length === 1){
             createCard(arrCountry[0]);
         }
@@ -46,11 +46,14 @@ const sendAPI = () => {
         if (arrCountry.length > 10){
             defaultModules.set(PNotifyMobile, {});
             alert({
-                text: 'Too many matches found. Please enter a more specific query.'
+                text: 'Too many matches. Please enter a more specific request.'
             });
         }
     })
-    .catch(error => console.log(error));
+        .catch(error => { defaultModules.set(PNotifyMobile, {});
+            alert({
+                text: 'No matches found. Please enter a more specific request.'
+            });});
 }
 
 inputCountry.addEventListener("input", debounsed(sendAPI, 750));
